@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soomuk Studio â ìë¬µ</title>
+  <meta name="description" content="ëì´ë´ê³ , ê¹ê² ë§ë ë¤. Build less. Build deeper.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ââââââââââââââââââââââââââââââââââââââ
+       Soomuk Studio â æ°´å¢¨ Website
+       Aesthetic: Ink wash painting (ìë¬µí)
+       ââââââââââââââââââââââââââââââââââââââ */
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #0a0a0a;
+      --ink-deep: #000;
+      --ink-medium: #333;
+      --ink-light: #666;
+      --ink-wash: #999;
+      --ink-faint: #ccc;
+      --ink-ghost: #e8e8e8;
+      --paper: #f7f5f2;
+      --paper-warm: #f0ede8;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.8;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--ink); color: var(--paper); }
+
+    /* ââ Paper Texture Overlay ââ */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ââ Navigation ââ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 100;
+      padding: 32px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(247, 245, 242, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 20px 56px;
+    }
+
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--ink); margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       HERO â å¢¨ ink drop impact
+       ââââââââââââââââââââââââââââââââââââââ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding: 0 56px;
+    }
+
+    /* Large ink circle â like a bold ink drop on paper */
+    .ink-circle {
+      position: absolute;
+      top: 50%; right: 8%;
+      transform: translateY(-50%);
+      width: 480px; height: 480px;
+    }
+
+    .ink-circle svg { width: 100%; height: 100%; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      color: var(--ink-deep);
+    }
+
+    .hero-content h1 .thin {
+      font-weight: 100;
+      color: var(--ink-medium);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-light);
+      letter-spacing: 0.08em;
+      margin-bottom: 0;
+    }
+
+    .hero-sub-en {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--ink-wash);
+      letter-spacing: 0.12em;
+      margin-top: 8px;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 48px; left: 56px;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .hero-scroll span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-wash);
+    }
+
+    .scroll-line {
+      width: 56px; height: 1px;
+      background: var(--ink-faint);
+      position: relative; overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 1px;
+      background: var(--ink);
+      animation: scrollRight 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollRight {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       INK WASH DIVIDERS â brush strokes
+       ââââââââââââââââââââââââââââââââââââââ */
+    .ink-divider {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 56px;
+      overflow: visible;
+    }
+
+    .ink-divider svg {
+      width: 100%;
+      height: 24px;
+      overflow: visible;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       PHILOSOPHY â ë¹ëì¹­ asymmetric layout
+       ââââââââââââââââââââââââââââââââââââââ */
+    .philosophy {
+      padding: 200px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 120px;
+      align-items: start;
+    }
+
+    .philosophy-left {
+      position: sticky;
+      top: 160px;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-wash);
+      margin-bottom: 16px;
+    }
+
+    .section-label-kr {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.1em;
+    }
+
+    .philosophy-right h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 48px;
+      letter-spacing: -0.02em;
+    }
+
+    .philosophy-right p {
+      font-size: 1rem;
+      color: var(--ink-light);
+      line-height: 2.2;
+      margin-bottom: 32px;
+    }
+
+    .philosophy-right .accent {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       PROCESS â ink wash steps
+       ââââââââââââââââââââââââââââââââââââââ */
+    .process-section {
+      padding: 160px 56px 200px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .process-header {
+      margin-bottom: 120px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .process-item {
+      padding: 56px 48px;
+      border-left: 1px solid var(--ink-ghost);
+      position: relative;
+    }
+
+    .process-item:first-child { border-left: none; }
+
+    .process-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--ink-ghost);
+      line-height: 1;
+      margin-bottom: 32px;
+      letter-spacing: -0.04em;
+    }
+
+    .process-item h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .process-item .kr {
+      font-size: 0.85rem;
+      color: var(--ink-wash);
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .process-item p {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.9;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       INK DROP SECTION â visual break
+       í ë°©ì¸ì ë¨¹ (One drop of ink)
+       ââââââââââââââââââââââââââââââââââââââ */
+    .ink-drop-section {
+      padding: 180px 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      min-height: 70vh;
+    }
+
+    .ink-drop-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ink-drop-visual svg {
+      width: 200px;
+      height: 260px;
+    }
+
+    .ink-drop-text {
+      text-align: center;
+      margin-top: 56px;
+    }
+
+    .ink-drop-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 100;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+      color: var(--ink-medium);
+    }
+
+    .ink-drop-text h2 strong {
+      font-weight: 900;
+      color: var(--ink-deep);
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       PRODUCT â card with ink border
+       ââââââââââââââââââââââââââââââââââââââ */
+    .product-section {
+      padding: 160px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-header { margin-bottom: 80px; }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    .product-card-visual {
+      background: var(--ink-deep);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card-visual::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .product-card-visual .product-title {
+      font-size: 2.4rem;
+      font-weight: 100;
+      color: var(--paper);
+      letter-spacing: 0.12em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-card-visual .product-title-sub {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.15em;
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-card-info {
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid var(--ink-ghost);
+      border-left: none;
+    }
+
+    .product-card-info p {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 2.2;
+      margin-bottom: 40px;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+      transition: gap 0.3s ease;
+    }
+
+    .product-link:hover { gap: 14px; }
+
+    .product-link .arrow {
+      width: 24px;
+      height: 1px;
+      background: var(--ink);
+      position: relative;
+    }
+
+    .product-link .arrow::after {
+      content: '';
+      position: absolute;
+      right: 0; top: -3px;
+      width: 8px; height: 8px;
+      border-right: 1px solid var(--ink);
+      border-top: 1px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .product-coming {
+      margin-top: 48px;
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.08em;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       ABOUT â with ink splash accent
+       ââââââââââââââââââââââââââââââââââââââ */
+    .about-section {
+      padding: 200px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 120px;
+      align-items: start;
+    }
+
+    .about-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 48px;
+    }
+
+    .about-left p {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 2.2;
+      margin-bottom: 28px;
+    }
+
+    .about-left .quote {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      padding-left: 24px;
+      border-left: 3px solid var(--ink);
+      margin: 40px 0;
+      line-height: 1.8;
+    }
+
+    .about-right {
+      padding-top: 40px;
+    }
+
+    .about-keywords {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .keyword-item {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--ink-ghost);
+    }
+
+    .keyword-item:last-child { border-bottom: none; }
+
+    .keyword-en {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      min-width: 100px;
+    }
+
+    .keyword-kr {
+      font-size: 0.8rem;
+      color: var(--ink-wash);
+      letter-spacing: 0.06em;
+    }
+
+    /* Founder note */
+    .founder-note {
+      margin-top: 56px;
+      padding: 32px;
+      background: var(--paper-warm);
+    }
+
+    .founder-note p {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      line-height: 1.9;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       CLOSING â bold statement
+       ââââââââââââââââââââââââââââââââââââââ */
+    .closing {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 56px;
+      position: relative;
+    }
+
+    .closing-bg-char {
+      position: absolute;
+      font-size: clamp(15rem, 30vw, 28rem);
+      font-weight: 900;
+      color: rgba(0,0,0,0.03);
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .closing h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .closing h2 strong {
+      font-weight: 900;
+    }
+
+    .closing .closing-en {
+      font-size: 0.8rem;
+      color: var(--ink-wash);
+      letter-spacing: 0.12em;
+      margin-top: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       FOOTER
+       ââââââââââââââââââââââââââââââââââââââ */
+    footer {
+      padding: 56px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--ink-ghost);
+    }
+
+    .footer-left a {
+      font-size: 0.88rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .footer-left a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--ink-faint);
+      transition: background 0.3s;
+    }
+
+    .footer-left a:hover::after { background: var(--ink); }
+
+    .footer-right {
+      font-size: 0.68rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.06em;
+    }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       ANIMATIONS â fade in on scroll
+       ââââââââââââââââââââââââââââââââââââââ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ââââââââââââââââââââââââââââââââââââââ
+       RESPONSIVE
+       ââââââââââââââââââââââââââââââââââââââ */
+    @media (max-width: 900px) {
+      nav { padding: 24px 28px; }
+      nav.scrolled { padding: 18px 28px; }
+
+      .nav-toggle { display: block; z-index: 101; }
+      .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+      .nav-toggle.active span:nth-child(2) { opacity: 0; }
+      .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+      .nav-links {
+        position: fixed; top: 0; right: -100%;
+        width: 100%; height: 100vh;
+        background: var(--paper);
+        flex-direction: column;
+        justify-content: center; align-items: center;
+        gap: 40px;
+        transition: right 0.4s ease;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 1rem; }
+
+      .hero { padding: 0 28px; }
+      .hero-content h1 { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+      .hero-scroll { left: 28px; }
+
+      .ink-circle {
+        width: 280px; height: 280px;
+        right: -40px; opacity: 0.5;
+      }
+
+      .philosophy {
+        grid-template-columns: 1fr;
+        gap: 48px; padding: 120px 28px;
+      }
+      .philosophy-left { position: static; }
+
+      .process-section { padding: 100px 28px 140px; }
+      .process-grid { grid-template-columns: 1fr; gap: 0; }
+      .process-item { border-left: none; border-top: 1px solid var(--ink-ghost); padding: 40px 0; }
+      .process-item:first-child { border-top: none; }
+
+      .ink-drop-section { padding: 100px 28px; min-height: 50vh; }
+      .ink-drop-visual svg { width: 140px; height: 180px; }
+
+      .product-section { padding: 100px 28px; }
+      .product-card { grid-template-columns: 1fr; }
+      .product-card-visual { padding: 56px 28px; }
+      .product-card-info { padding: 48px 28px; border-left: 1px solid var(--ink-ghost); border-top: none; }
+
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 64px; padding: 120px 28px;
+      }
+
+      .closing { padding: 80px 28px; min-height: 60vh; }
+
+      .ink-divider { padding: 0 28px; }
+
+      footer {
+        flex-direction: column; gap: 20px;
+        text-align: center; padding: 40px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ââââ Navigation ââââ -->
+  <nav>
+    <a href="#" class="nav-logo">Soomuk</a>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ââââ Hero ââââ -->
+  <section class="hero">
+    <!-- Large ink circle â like an ensÅ or bold ink drop -->
+    <div class="ink-circle">
+      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="inkBleed" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="1.5"/>
+          </filter>
+          <radialGradient id="inkGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#000" stop-opacity="0.9"/>
+            <stop offset="60%" stop-color="#111" stop-opacity="0.7"/>
+            <stop offset="85%" stop-color="#222" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#333" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="250" cy="250" r="200" fill="url(#inkGrad)" filter="url(#inkBleed)"/>
+        <!-- small splatter dots -->
+        <circle cx="120" cy="380" r="5" fill="#000" opacity="0.15" filter="url(#inkBleed)"/>
+        <circle cx="400" cy="140" r="8" fill="#000" opacity="0.1" filter="url(#inkBleed)"/>
+        <circle cx="350" cy="420" r="4" fill="#000" opacity="0.12" filter="url(#inkBleed)"/>
+        <circle cx="90" cy="180" r="6" fill="#000" opacity="0.08" filter="url(#inkBleed)"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="reveal">ëì´ë´ê³ ,<br><span class="thin">ê¹ê²</span> ë§ë ë¤</h1>
+      <p class="hero-sub reveal reveal-delay-1">ë¶íìí ê²ì ëì´ë´ê³ , ê²°êµ­ ë¨ë ê²ë§ ë§ë­ëë¤</p>
+      <p class="hero-sub-en reveal reveal-delay-2">Build less. Build deeper.</p>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ââââ Ink Brush Divider ââââ -->
+  <div class="ink-divider">
+    <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="brushBleed">
+          <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="5"/>
+          <feDisplacementMap in="SourceGraphic" scale="4"/>
+        </filter>
+      </defs>
+      <path d="M0,12 C200,8 300,16 500,11 C700,6 900,15 1200,12" stroke="#000" stroke-width="2.5" fill="none" opacity="0.12" filter="url(#brushBleed)"/>
+    </svg>
+  </div>
+
+  <!-- ââââ Philosophy ââââ -->
+  <section class="philosophy" id="philosophy">
+    <div class="philosophy-left reveal">
+      <div class="section-label">Philosophy</div>
+      <div class="section-label-kr">ì² í</div>
+    </div>
+    <div class="philosophy-right">
+      <h2 class="reveal">ì°ë¦¬ë ëíì§ ììµëë¤<br>ë¶íìí ê²ì ëì´ë´ê³ <br>íµì¬ë§ ë¨ê¹ëë¤</h2>
+      <p class="reveal reveal-delay-1">
+        ìë¬µì´ ìì ì±ì°ë ê²ì´ ìëë¼<br>
+        ë³¸ì§ì ëë¬ë´ë ë°©ìì´ë¯
+      </p>
+      <p class="reveal reveal-delay-2">
+        ì°ë¦¬ë<br>
+        <span class="accent">ê²½íì ë³¸ì§ì ëë¬ëëë¤</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ââââ Process ââââ -->
+  <section class="process-section" id="process">
+    <div class="process-header">
+      <div class="section-label reveal">How We Build</div>
+      <div class="section-label-kr reveal">ë§ëë ë°©ì</div>
+    </div>
+    <div class="process-grid">
+      <div class="process-item reveal">
+        <div class="process-num">01</div>
+        <h3>Remove</h3>
+        <div class="kr">ëì´ëëë¤</div>
+        <p>ë¶íìí ììë¥¼ ì ê±°í©ëë¤<br>ë³µì¡í¨ì ì¤ìëë¤</p>
+      </div>
+      <div class="process-item reveal reveal-delay-1">
+        <div class="process-num">02</div>
+        <h3>Distill</h3>
+        <div class="kr">ë¨ê¹ëë¤</div>
+        <p>íµì¬ë§ ë¨ê¹ëë¤<br>ì ë§ ì¤ìí ê²ë§</p>
+      </div>
+      <div class="process-item reveal reveal-delay-2">
+        <div class="process-num">03</div>
+        <h3>Build</h3>
+        <div class="kr">ë§ë­ëë¤</div>
+        <p>ìì°ì¤ë½ê² ì´ì´ì§ë<br>ê²½íì¼ë¡ ìì±í©ëë¤</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ââââ Ink Drop â visual interlude ââââ -->
+  <section class="ink-drop-section">
+    <div class="ink-drop-visual reveal">
+      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="dropBleed" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="5" seed="8" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="0.8"/>
+          </filter>
+          <radialGradient id="dropGrad" cx="50%" cy="55%" r="45%">
+            <stop offset="0%" stop-color="#000" stop-opacity="1"/>
+            <stop offset="70%" stop-color="#111" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#222" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- The falling drop -->
+        <ellipse cx="100" cy="40" rx="6" ry="10" fill="#000" opacity="0.6" filter="url(#dropBleed)"/>
+        <!-- Thin trail -->
+        <line x1="100" y1="50" x2="100" y2="100" stroke="#000" stroke-width="1.5" opacity="0.2"/>
+        <!-- Main ink splash on impact -->
+        <ellipse cx="100" cy="160" rx="65" ry="55" fill="url(#dropGrad)" filter="url(#dropBleed)"/>
+        <!-- Tiny splash dots -->
+        <circle cx="42" cy="135" r="3.5" fill="#000" opacity="0.3" filter="url(#dropBleed)"/>
+        <circle cx="155" cy="128" r="2.5" fill="#000" opacity="0.25" filter="url(#dropBleed)"/>
+        <circle cx="60" cy="210" r="4" fill="#000" opacity="0.15" filter="url(#dropBleed)"/>
+        <circle cx="148" cy="200" r="3" fill="#000" opacity="0.2" filter="url(#dropBleed)"/>
+        <circle cx="30" cy="170" r="2" fill="#000" opacity="0.18" filter="url(#dropBleed)"/>
+        <circle cx="170" cy="165" r="2.5" fill="#000" opacity="0.12" filter="url(#dropBleed)"/>
+      </svg>
+      <div class="ink-drop-text">
+        <h2>ì¢ì ê²½íì<br>ì¤ëªíì§ ììë<br><strong>ìì°ì¤ë½ê² ì´ì´ì§ëë¤</strong></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ââââ Ink Brush Divider ââââ -->
+  <div class="ink-divider">
+    <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,12 C150,15 400,7 600,12 C800,17 1000,9 1200,12" stroke="#000" stroke-width="2" fill="none" opacity="0.08" filter="url(#brushBleed)"/>
+    </svg>
+  </div>
+
+  <!-- ââââ Product ââââ -->
+  <section class="product-section" id="product">
+    <div class="product-header">
+      <div class="section-label reveal">Product</div>
+      <div class="section-label-kr reveal">ì í</div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-card-visual">
+        <div class="product-title">stillafter</div>
+        <div class="product-title-sub">ì¤í¸ì íí°</div>
+      </div>
+      <div class="product-card-info">
+        <p>
+          ì´ë³ì ì ëë¡ ëë¼ ì ìëë¡ ëë ê²½í<br><br>
+          ë§ë¡ ì¤ëªíê¸° ì´ë ¤ì´ ê°ì ì<br>
+          ì¡°ê¸ ë í¸íê² ë§ì£¼í  ì ìê² í©ëë¤
+        </p>
+        <a href="https://stillafter.com" class="product-link" target="_blank" rel="noopener">
+          ìë¹ì¤ ë³´ê¸° <span class="arrow"></span>
+        </a>
+        <p class="product-coming">More experiences coming soon</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ââââ About ââââ -->
+  <section class="about-section" id="about">
+    <div class="about-left">
+      <div class="section-label reveal">About</div>
+      <div class="section-label-kr reveal" style="margin-bottom: 48px;">ìê°</div>
+
+      <h2 class="reveal">íëì ì§ë¬¸ìì<br>ììëììµëë¤</h2>
+
+      <div class="quote reveal">"ì ë§ íìí ê±´ ë¬´ìì¼ê¹"</div>
+
+      <p class="reveal">
+        ì°ë¦¬ë ë¶íìí ê²ì ëì´ë´ê³ <br>
+        ì¬ëìê² ë¨ë ê²½íì ë§ë­ëë¤
+      </p>
+
+      <div class="founder-note reveal">
+        <p>
+          Soomukì ëìí ì ê³µìì ìì ê³¼<br>
+          UX ì ëµ ê²½íì´ ë§ë ììëììµëë¤<br><br>
+          ëì´ë´ê³ , ë¨ê¸°ê³ , ìì±íë ë°©ì â<br>
+          ìë¬µì ì¬ê³ ë°©ìì ëì§í¸ ê²½íì ë´ê³  ììµëë¤
+        </p>
+      </div>
+    </div>
+
+    <div class="about-right reveal">
+      <div class="about-keywords">
+        <div class="keyword-item">
+          <span class="keyword-en">Essence</span>
+          <span class="keyword-kr">ë³¸ì§</span>
+        </div>
+        <div class="keyword-item">
+          <span class="keyword-en">Simplicity</span>
+          <span class="keyword-kr">ë¨ìí¨</span>
+        </div>
+        <div class="keyword-item">
+          <span class="keyword-en">Depth</span>
+          <span class="keyword-kr">ê¹ì´</span>
+        </div>
+        <div class="keyword-item">
+          <span class="keyword-en">Clarity</span>
+          <span class="keyword-kr">ëªíí¨</span>
+        </div>
+        <div class="keyword-item">
+          <span class="keyword-en">Flow</span>
+          <span class="keyword-kr">ìì°ì¤ë¬ì</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ââââ Closing ââââ -->
+  <section class="closing">
+    <div class="closing-bg-char">å¢¨</div>
+    <h2 class="reveal">ì°ë¦¬ë ë ë§ë¤ì§ ììµëë¤<br><strong>ì°ë¦¬ë ë¨ë ê²ì ë§ë­ëë¤</strong></h2>
+    <p class="closing-en reveal reveal-delay-1">We don't build more. We build what remains.</p>
+  </section>
+
+  <!-- ââââ Footer ââââ -->
+  <footer id="contact">
+    <div class="footer-left">
+      <a href="mailto:ysk@soomukstudio.com">ysk@soomukstudio.com</a>
+    </div>
+    <div class="footer-right">Â© 2026 Soomuk Studio</div>
+  </footer>
+
+  <!-- ââââ Script ââââ -->
+  <script>
+    // Nav scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      links.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        links.classList.remove('open');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
